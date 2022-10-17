@@ -1,0 +1,12 @@
+1665726970653	Delete element
+1665728083905	Delete element
+1665751273885	Delete element
+1665751556079	Rename package 'com.example.demo'
+1665751583384	Rename package 'com.example.demo.config'
+1665751617044	Rename package 'com.example.demo.controller'
+1665751642588	Rename package 'com.example.demo.dto'
+1665751662929	Rename package 'com.example.demo.exception'
+1665751685304	Rename package 'com.example.demo.model'
+1665751704369	Rename package 'com.example.demo.repository'
+1665751721103	Rename package 'com.example.demo.security'
+1665751742513	Rename package 'com.example.demo.service'

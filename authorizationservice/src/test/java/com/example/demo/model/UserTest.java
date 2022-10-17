@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import com.ibs.demo.model.User;
+
 public class UserTest {
 	
 	User user = new User();
