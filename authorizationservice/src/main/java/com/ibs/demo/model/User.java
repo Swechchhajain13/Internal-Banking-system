@@ -46,7 +46,6 @@ package com.ibs.demo.model;
 	@Column(name = "contact_no")
 	private String contactno;
 
-	@Column(name = "reset_token")
-	private String resetToken;
+	
 
 }

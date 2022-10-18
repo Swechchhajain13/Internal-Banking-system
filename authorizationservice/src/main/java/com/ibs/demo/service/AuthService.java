@@ -11,7 +11,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ibs.demo.dto.LoginRequest;
+import com.ibs.demo.dto.ResetRequest;
 import com.ibs.demo.dto.UserDto;
+import com.ibs.demo.exception.UserNotFoundException;
+import com.ibs.demo.model.User;
 import com.ibs.demo.repository.Userrepository;
 import com.ibs.demo.security.JwtProvider;
 
@@ -44,6 +47,20 @@ public class AuthService {
 		return new AuthenticationResponse(authenticationToken, loginRequest.getUsername());
 	}
 
+	public void reset(ResetRequest resetRequest) {
+		String userName = resetRequest.getUserName();
+		/*String emailid = resetRequest.getEmailid()
+;		User user = userrepository.findByEmailid(emailid).get();*/
+		
+		User user = userrepository.findByUserName(userName).orElseThrow(() -> new UserNotFoundException("For userName " + userName));
+	
+		user.setPassword(encodePassword(resetRequest.getPassword()));
+		
+		userrepository.save(user);
+		
+
+		
+	}
 	public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() {
 		org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder
 				.getContext().getAuthentication().getPrincipal();

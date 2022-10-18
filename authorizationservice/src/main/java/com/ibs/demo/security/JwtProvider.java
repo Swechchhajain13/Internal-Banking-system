@@ -11,11 +11,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+import com.ibs.demo.controller.AuthController;
+
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 
 @Service
 public class JwtProvider {
@@ -41,9 +45,16 @@ key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     }
 	
 	public boolean validateToken(String jwt) {
+		try {
         Jwts.parser().setSigningKey(key).parseClaimsJws(jwt);
         return true;
     }
+
+			catch (ExpiredJwtException e) {
+				log.error("JWT token is expired: {}", e.getMessage());
+		}
+		return false;
+	}
 	
 	 public String getUsernameFromJWT(String token) {
 	        Claims claims = Jwts.parser()

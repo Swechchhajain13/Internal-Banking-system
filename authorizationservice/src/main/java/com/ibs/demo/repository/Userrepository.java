@@ -15,10 +15,10 @@ import com.ibs.demo.model.User;
 		
 
 		Optional<User> findByUserName(String username);
-		
+		Optional<User> findByEmailid (String emailid);
 		
 		 
-		Optional<User> findByResetToken(String resetToken);
+	
 		
 		}
 

@@ -5,11 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibs.demo.dto.LoginRequest;
+import com.ibs.demo.dto.ResetRequest;
 import com.ibs.demo.dto.UserDto;
 import com.ibs.demo.security.UserService;
 import com.ibs.demo.service.AuthService;
@@ -49,6 +51,14 @@ public class AuthController {
 	
 	@GetMapping("/get/{userName}")
     public ResponseEntity<UserDto> getSingleUser(@PathVariable  String userName) {
+		log.info("Inside View User Details : ");
         return new ResponseEntity<>(userService.readSingleUser(userName), HttpStatus.OK);
     }
+	
+	@PutMapping("/reset")
+	public ResponseEntity update(@RequestBody ResetRequest resetRequest) {
+    	   authService.reset(resetRequest);
+    	   log.info("Inside Password Reset : ");
+    	   return new ResponseEntity(HttpStatus.OK);
+       }
 }

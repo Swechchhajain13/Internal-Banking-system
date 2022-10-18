@@ -1,0 +1,5 @@
+package com.ibs.demo.dto;
+
+public class ResetRequest {
+
+}
