@@ -40,4 +40,5 @@
     <fullyQualifiedTypeName name="com.ibs.demo.dto.ResetRequest"/>
     <fullyQualifiedTypeName name="com.ibs.demo.model.User"/>
     <fullyQualifiedTypeName name="io.jsonwebtoken.ExpiredJwtException"/>
+    <fullyQualifiedTypeName name="javax.persistence.UniqueConstraint"/>
 </qualifiedTypeNameHistroy>

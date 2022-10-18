@@ -56,7 +56,7 @@ public class AuthController {
     }
 	
 	@PutMapping("/reset")
-	public ResponseEntity update(@RequestBody ResetRequest resetRequest) {
+	public ResponseEntity reset(@RequestBody ResetRequest resetRequest) {
     	   authService.reset(resetRequest);
     	   log.info("Inside Password Reset : ");
     	   return new ResponseEntity(HttpStatus.OK);

@@ -7,22 +7,24 @@ package com.ibs.demo.model;
 	import javax.persistence.GenerationType;
 	import javax.persistence.Id;
 	import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-	import lombok.Getter;
+import lombok.Getter;
 	import lombok.NoArgsConstructor;
 	import lombok.Setter;
 	@NoArgsConstructor
 	@Getter
 	@Setter
 	@Entity 
-	@Table(name = "user")
+	@Table(name = "user", uniqueConstraints= {@UniqueConstraint(columnNames = {"userName", "email_id"})})
+	
 	public class User {
 		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name = "userName")
+	@Column(name = "userName" )
 	private String userName;
 
 	@Column(name = "email_id")
