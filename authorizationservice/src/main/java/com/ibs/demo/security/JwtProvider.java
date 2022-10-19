@@ -37,7 +37,7 @@ key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
         return Jwts.builder()
                 .setSubject(principal.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 180000))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
                 .claim("expiry",System.currentTimeMillis() +180000)
                 .claim("id","ibs_key_security_0105")
                 .signWith(key)
