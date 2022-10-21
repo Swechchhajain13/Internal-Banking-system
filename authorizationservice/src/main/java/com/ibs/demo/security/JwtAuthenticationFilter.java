@@ -34,7 +34,7 @@ private UserDetailsService userDetailsService;
 		// TODO Auto-generated method stub
 		String jwt = getJwtFromRequest(request);
 
-		if(StringUtils.hasText(jwt) && jwtProvider.validateToken(jwt)){
+		if(StringUtils.hasText(jwt) && !jwt.equalsIgnoreCase("undefined") && jwtProvider.validateToken(jwt)){
             String username = jwtProvider.getUsernameFromJWT(jwt);
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
