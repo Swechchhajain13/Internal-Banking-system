@@ -1,4 +1,5 @@
 package com.ibs.demo.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,45 +21,46 @@ import com.ibs.demo.service.AuthenticationResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RestController 
+@RestController
 @RequestMapping("/api/auth")
 
-	
-
-	
 public class AuthController {
-	
+
 	@Autowired
 	private UserService userService;
-	
-	@Autowired 
+
+	@Autowired
 	private AuthService authService;
-	
-	
+
 	@PostMapping("/login")
-    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
+	public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
 		log.info("Inside Login : ");
-        return authService.login(loginRequest);
-    }
+		return authService.login(loginRequest);
+	}
 
 	/*
-	   @GetMapping("/get/{id}")
-	    public ResponseEntity<UserDto> getSingleUser(@PathVariable  Long id) {
-	        return new ResponseEntity<>(userService.readSingleUser(id), HttpStatus.OK);
-	    }
-	}
-	*/
-	
+	 * @GetMapping("/get/{id}") public ResponseEntity<UserDto>
+	 * getSingleUser(@PathVariable Long id) { return new
+	 * ResponseEntity<>(userService.readSingleUser(id), HttpStatus.OK); } }
+	 */
+
 	@GetMapping("/get/{userName}")
-    public ResponseEntity<UserDto> getSingleUser(@PathVariable  String userName) {
+	public ResponseEntity<UserDto> getSingleUser(@PathVariable String userName) {
 		log.info("Inside View User Details : ");
-        return new ResponseEntity<>(userService.readSingleUser(userName), HttpStatus.OK);
-    }
-	
+		return new ResponseEntity<>(userService.readSingleUser(userName), HttpStatus.OK);
+	}
+
 	@PutMapping("/reset")
 	public ResponseEntity reset(@RequestBody ResetRequest resetRequest) {
-    	   authService.reset(resetRequest);
-    	   log.info("Inside Password Reset : ");
-    	   return new ResponseEntity(HttpStatus.OK);
-       }
+		authService.reset(resetRequest);
+		log.info("Inside Password Reset : ");
+		return new ResponseEntity(HttpStatus.OK);
+	}
+
+	@PutMapping("/usernamecheck")
+	public ResponseEntity usernamecheck(@RequestBody ResetRequest resetRequest) {
+		authService.usernamecheck(resetRequest);
+		log.info("Inside usernamecheck : ");
+		return new ResponseEntity(HttpStatus.OK);
+	}
 }
