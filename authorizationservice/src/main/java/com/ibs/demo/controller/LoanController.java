@@ -32,6 +32,7 @@ public class LoanController {
 
 	@Autowired
 	private AppliedLoanService appliedLoanService;
+	
 
 	@GetMapping("/getAllLoanTypes")
 	public List<LoanType> getAllLoans() {
@@ -64,6 +65,24 @@ public class LoanController {
 	public ResponseEntity<AppliedLoans> updateLoan(@PathVariable String userName, @RequestBody AppliedLoans appliedLoans) {
 		log.info("Inside Update Loan : ");
 		return new ResponseEntity<>(appliedLoanService.applyLoan(userName, appliedLoans), HttpStatus.OK);
+	}
+	
+	@GetMapping("/getLoanTypeById/{id}")
+	public ResponseEntity<LoanType> getLoanType(@PathVariable Integer id) {
+		LoanType loanType = loanTypeService.getLoanById(id);
+		log.info(loanType.toString());
+		return new ResponseEntity<>(loanType, HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateInterest")
+	public ResponseEntity<LoanType> updateLoanInterest(@RequestBody LoanType loanType){
+		log.info(loanType.toString());
+		return new ResponseEntity<>(loanTypeService.updateInterest(loanType), HttpStatus.OK);
+	}
+	
+	@GetMapping("/LoanType/getAllLoanDetails")
+	public ResponseEntity<List<AppliedLoans>> getAllLoanRecords(){
+		return new ResponseEntity<>(appliedLoanService.getAllLoanDetails(), HttpStatus.OK);
 	}
 
 }

@@ -34,5 +34,10 @@ public class AppliedLoanService {
 		return appliedLoanRepository.save(appliedLoans);
 	}
 	
+	public List<AppliedLoans> getAllLoanDetails(){
+		List<AppliedLoans> list = appliedLoanRepository.findAll();
+		System.out.println(list);
+		return list;
+	}
 	
 }

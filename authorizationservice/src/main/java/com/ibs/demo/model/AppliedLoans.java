@@ -63,7 +63,7 @@ public class AppliedLoans {
 	@JsonProperty("permanentAddress")
 	private String permanent_address;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne//(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user_id;
 	
