@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ibs.demo.dto.LoginRequest;
+import com.ibs.demo.dto.RegisterRequest;
 import com.ibs.demo.dto.ResetRequest;
 import com.ibs.demo.exception.UserNotFoundException;
 import com.ibs.demo.model.User;
@@ -77,6 +78,24 @@ public class AuthService {
 		User user = userrepository.findByUserName(userName)
 				.orElseThrow(() -> new UserNotFoundException("For userName " + userName));
 		log.info("Username Exists");
+	}
+
+	public void signup(RegisterRequest registerRequest) {
+		// TODO Auto-generated method stub
+		 User user = new User();
+	        
+		    user.setName(registerRequest.getName());
+	        user.setUserName(registerRequest.getUserName());
+	        user.setEmailid(registerRequest.getEmailid());
+	         user.setPassword(encodePassword(registerRequest.getPassword()));
+	         user.setGender(registerRequest.getGender());
+	         user.setDesignation(registerRequest.getDesignation());
+	         user.setUsertype(registerRequest.getUsertype());
+	         user.setAddress(registerRequest.getAddress());
+	         user.setContactno(registerRequest.getContactno());
+	         
+	         userrepository.save(user);
+		
 	}
 
 }
