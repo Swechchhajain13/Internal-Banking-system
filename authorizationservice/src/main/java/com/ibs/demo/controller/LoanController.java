@@ -80,7 +80,7 @@ public class LoanController {
 		return new ResponseEntity<>(loanTypeService.updateInterest(loanType), HttpStatus.OK);
 	}
 	
-	@GetMapping("/LoanType/getAllLoanDetails")
+	@GetMapping("/getAllLoanDetails")
 	public ResponseEntity<List<AppliedLoans>> getAllLoanRecords(){
 		return new ResponseEntity<>(appliedLoanService.getAllLoanDetails(), HttpStatus.OK);
 	}

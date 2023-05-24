@@ -1,5 +1,7 @@
 package com.ibs.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import com.ibs.demo.dto.LoginRequest;
 import com.ibs.demo.dto.RegisterRequest;
 import com.ibs.demo.dto.ResetRequest;
 import com.ibs.demo.dto.UserDto;
+import com.ibs.demo.model.User;
 import com.ibs.demo.security.UserService;
 import com.ibs.demo.service.AuthService;
 import com.ibs.demo.service.AuthenticationResponse;
@@ -85,7 +88,12 @@ public class AuthController {
 	 * 
 	 * 
 	 */
-
+	
+	@GetMapping("/getAllUsers")
+	public ResponseEntity <List<User>> getAllUsers(){
+		return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+	}
+  
 	@PutMapping("/reset")
 	public ResponseEntity reset(@RequestBody ResetRequest resetRequest) {
 		authService.reset(resetRequest);

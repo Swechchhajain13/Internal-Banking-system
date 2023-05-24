@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,12 +44,21 @@ public class AuthService {
 	}
 
 	public AuthenticationResponse login(LoginRequest loginRequest) {
-		Authentication authenticate = authenticationManager.authenticate(
+		try {
+			Authentication authenticate = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authenticate);
 		String authenticationToken = jwtProvider.generateToken(authenticate);
-		return new AuthenticationResponse(authenticationToken, loginRequest.getUsername());
+		// UserDetailsServiceImpl userDetailsimpl =
+		// (UserDetailsServiceImpl)authenticate.getPrincipal();
+		// String currentUser = (String) user.getUsertype();
+		// String currentUser = (String) userDetailsimpl.toString();
+		String currentUser = (String) authenticate.getName();
+		return new AuthenticationResponse(authenticationToken, loginRequest.getUsername(), currentUser);
+	} catch (AuthenticationException e) {
+		throw new UserNotFoundException("Invalid Credentials");
 	}
+}
 
 	public void reset(ResetRequest resetRequest) {
 		String userName = resetRequest.getUserName();

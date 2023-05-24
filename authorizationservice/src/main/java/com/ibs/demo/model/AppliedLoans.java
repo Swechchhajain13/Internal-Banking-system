@@ -3,7 +3,6 @@ package com.ibs.demo.model;
 import java.sql.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,6 +35,9 @@ public class AppliedLoans {
 	@JsonProperty("applyDate")
 	private Date apply_date;
 	
+	@JsonProperty("endDate")
+	private Date end_date;
+
 	@OneToOne
 	@JoinColumn(name = "loan_id", referencedColumnName = "id")
 	private LoanType loan_id;
@@ -48,6 +50,9 @@ public class AppliedLoans {
 	
 	@JsonProperty("annualIncome")
 	private long annual_income;
+	
+	@JsonProperty("monthlyEmi")
+    private long monthly_emi;
 	
 //	@JsonProperty("companyName")
 //	private String company_name;
@@ -66,6 +71,8 @@ public class AppliedLoans {
 	@OneToOne//(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user_id;
+	
+	
 	
 	
 }
